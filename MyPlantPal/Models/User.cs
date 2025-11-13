@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace PlantCareManager.Models
+namespace MyPlantPal.Models
 {
     // Data model for a user
     public class User

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace PlantCareManager.Services
+namespace MyPlantPal.Services
 {
     // Generic service for saving and loading data to JSON files
     public class DataStore
