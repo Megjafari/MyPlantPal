@@ -1,8 +1,8 @@
-﻿using PlantCareManager.Models;
+﻿using MyPlantPal.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PlantCareManager.Services
+namespace MyPlantPal.Services
 {
     // Service for managing users
     public class UserService

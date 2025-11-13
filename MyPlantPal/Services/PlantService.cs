@@ -1,5 +1,5 @@
 ﻿using MyPlantPal.Models;
-using PlantCareManager.Services;
+using MyPlantPal.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +79,14 @@ namespace MyPlantPal.Services
         };
         }
 
-        
+        public Plant CreatePlantFromTemplate(Plant template, string ownerUsername)
+        {
+            var plant = new Plant(template.Name, template.Species, ownerUsername)
+            {
+                WateringIntervalDays = template.WateringIntervalDays
+            };
+            return plant;
+        }
 
         public bool AddPlant(Plant plant)
         {
