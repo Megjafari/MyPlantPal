@@ -1,0 +1,44 @@
+# =========================
+# Visual Studio / .NET ignore
+# =========================
+
+## Build Folders
+bin/
+obj/
+
+## Visual Studio temporary files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Rider IDE
+.idea/
+
+## OS generated files
+.DS_Store
+Thumbs.db
+
+## Logs
+*.log
+
+## NuGet
+*.nupkg
+*.snupkg
+packages/
+*.lock.json
+
+## Other
+*.exe
+*.dll
+*.pdb
+*.cache
+*.dbmdl
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# VS Code
+.vscode/
