@@ -8,10 +8,15 @@ namespace MyPlantPal.Services
     // Generic service for saving and loading data to JSON files
     public class DataStore
     {
-        private readonly string _baseDataPath = "Data/";
+        private readonly string _baseDataPath;
 
         public DataStore()
         {
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            string projectRoot = Path.GetFullPath(Path.Combine(exePath, @"..\..\..\")); //that put json info to user.json
+            _baseDataPath = Path.Combine(projectRoot, "Data");
+
+
             // Create the 'Data/' folder if it doesn't exist
             if (!Directory.Exists(_baseDataPath))
             {
