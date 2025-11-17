@@ -150,5 +150,74 @@ namespace MyPlantPal.Services
         {
             return _plants.FirstOrDefault(p => p.Id == plantId && p.OwnerUsername == ownerUsername);
         }
+        
+        public Plantstatistics GetPlantStatistics(string username)  // Generate statistics for user's plants
+        {
+            var userPlants = GetUserPlants(username);
+            var stats = new Plantstatistics();
+
+            if (userPlants.Count == 0)
+                return stats;
+
+            stats.TotalPlants = userPlants.Count;   
+            stats.PlantsNeedingWater = userPlants.Count(p => p.NeedsWatering);
+            stats.PlantsWateredToday = userPlants.Count(p => p.LastWatered.Date == DateTime.Today);
+            stats.AverageWateringInterval = Math.Round(userPlants.Average(p => p.WateringIntervalDays), 1); // Rounded to 1 decimal place
+
+            // Find most common plant species
+            var mostCommon = userPlants
+                .GroupBy(p => p.Species)
+                .OrderByDescending(g => g.Count())
+                .FirstOrDefault();
+
+            stats.MostCommonPlantType = mostCommon?.Key ?? "None";  
+
+            // Find plants needing most frequent watering (most thirsty)
+            stats.MostThirstyPlantCount = userPlants
+                .Where(p => p.WateringIntervalDays <= 3)
+                .Count();
+
+            // Find healthiest plants (watered on time - not overdue)
+            stats.HealthiestPlantCount = userPlants
+                .Where(p => !p.NeedsWatering)
+                .Count();
+
+            return stats;
+        }
+
+        public List<Plant> GetPlantsByWateringFrequency(string username)    // Plants sorted by watering frequency
+        {
+            return GetUserPlants(username)
+                .OrderBy(p => p.WateringIntervalDays)
+                .ToList();
+        }
+
+        public List<Plant> GetOverduePlants(string username)    // Plants that are overdue for watering
+        {
+            return GetUserPlants(username)
+                .Where(p => p.NeedsWatering)
+                .OrderByDescending(p => (DateTime.Now - p.NextWateringDate).TotalDays)
+                .ToList();
+        }
+
+        public Dictionary<string, int> GetPlantsBySpecies(string username)  // Count of plants by species
+        {
+            return GetUserPlants(username)
+                .GroupBy(p => p.Species)
+                .ToDictionary(g => g.Key, g => g.Count());
+        }
+
+        public Plant GetMostThirstyPlant(string username)   // Plant that needs watering most frequently
+        {
+            return GetUserPlants(username)
+                .OrderBy(p => p.WateringIntervalDays)
+                .FirstOrDefault();
+        }
+
+        public Plant GetMostNeglectedPlant(string username)     // Plant that is most neglected (most overdue)
+        {
+            return GetOverduePlants(username)
+                .FirstOrDefault();
+        }
     }
 }
