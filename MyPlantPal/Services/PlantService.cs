@@ -88,7 +88,7 @@ namespace MyPlantPal.Services
             return plant;
         }
 
-        public bool AddPlant(Plant plant)
+        public bool AddPlant(string testPlantName, string v, Plant plant)
         {
             if (string.IsNullOrWhiteSpace(plant.Name) || string.IsNullOrWhiteSpace(plant.OwnerUsername))
             {
@@ -218,6 +218,26 @@ namespace MyPlantPal.Services
         {
             return GetOverduePlants(username)
                 .FirstOrDefault();
+        }
+
+        public bool AddPlant(string name, string species, string ownerUsername, int wateringIntervalDays)
+        {
+            // 1. Create the new Plant object
+            var plant = new Plant(name, species, ownerUsername)
+            {
+                WateringIntervalDays = wateringIntervalDays,
+            };
+
+            // Simple validation
+            if (string.IsNullOrWhiteSpace(plant.Name) || string.IsNullOrWhiteSpace(plant.OwnerUsername))
+            {
+                return false;
+            }
+
+            // 2. Add to list and save
+            _plants.Add(plant);
+            SavePlants();
+            return true;
         }
     }
 }
