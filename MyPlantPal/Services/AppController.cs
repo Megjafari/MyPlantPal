@@ -139,7 +139,24 @@ namespace MyPlantPal
             if (_currentUser == null) return;
             AnsiConsole.Clear();
             var plants = _plantService.GetUserPlants(_currentUser.Username);
-            _menuService.DisplayPlantsTable(plants);
+            _menuService.DisplayPlantsTable(plants); // Show the table
+
+            if (plants.Count > 0)
+            {
+                // Add option to remove a plant after viewing the list
+                var choice = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("[green]Options[/]")
+                        .AddChoices(new[] {
+                    "Remove Plant", // New option
+                    "Back to Main Menu"
+                        }));
+
+                if (choice == "Remove Plant")
+                {
+                    HandleRemovePlant(plants); // Call the new handler
+                }
+            }
         }
 
         private void HandleAddPlantWorkflow()
@@ -243,6 +260,63 @@ namespace MyPlantPal
                     }
                 }
             }
+
+
+
+
+
+
+
+
         }
+
+        private void HandleRemovePlant(List<Plant> currentPlants)
+        {
+            if (_currentUser == null) return;
+
+            // 1. Get the user's choice from MenuService
+            var plantNameChoice = _menuService.AskForPlantToRemove(currentPlants);
+
+            // Check if the user selected "Back" or if the list was empty
+            if (string.IsNullOrEmpty(plantNameChoice) || plantNameChoice == " Back") return;
+
+            // 2. Find the plant object by name to get its unique ID
+            var plantToRemove = currentPlants.FirstOrDefault(p => p.Name == plantNameChoice);
+
+            if (plantToRemove != null)
+            {
+                // 3. Request confirmation
+                var confirmed = AnsiConsole.Confirm($"[red]Are you sure you want to permanently remove {plantToRemove.Name}?[/]");
+
+                if (confirmed)
+                {
+                    // 4. Call PlantService to remove the plant
+                    bool success = _plantService.RemovePlant(plantToRemove.Id, _currentUser.Username);
+
+                    if (success)
+                    {
+                        _menuService.ShowSuccessMessage($"Plant '{plantToRemove.Name}' removed successfully.");
+                    }
+                    else
+                    {
+                        _menuService.ShowErrorMessage("Error: Could not remove plant.");
+                    }
+                }
+                else
+                {
+                    _menuService.ShowErrorMessage("Removal cancelled.");
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
+
 }

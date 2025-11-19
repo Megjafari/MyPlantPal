@@ -1,12 +1,12 @@
 [
   {
-    "Id": "d3d371fa-72e1-493e-ad9a-f433620eac19",
-    "Name": "Snake Plant",
-    "Species": "Sansevieria trifasciata",
+    "Id": "6dd08010-6c02-45a0-8e5b-268ba076e1b0",
+    "Name": "ZZ Plant",
+    "Species": "Zamioculcas zamiifolia",
     "OwnerUsername": "Alex",
-    "LastWatered": "2025-11-19T21:55:21.4179763+01:00",
+    "LastWatered": "2025-11-19T23:00:16.0494574+01:00",
     "WateringIntervalDays": 14,
-    "NextWateringDate": "2025-12-03T21:55:21.4179763+01:00",
+    "NextWateringDate": "2025-12-03T23:00:16.0494574+01:00",
     "NeedsWatering": false
   }
 ]
