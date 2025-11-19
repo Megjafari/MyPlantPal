@@ -62,7 +62,7 @@ namespace MyPlantPal
             }
             else
             {
-                // ИСПРАВЛЕНО: _menuService вместо _menuConsole
+                
                 _menuService.ShowErrorMessage("Registration failed. Username already exists.");
             }
         }
@@ -261,13 +261,6 @@ namespace MyPlantPal
                 }
             }
 
-
-
-
-
-
-
-
         }
 
         private void HandleRemovePlant(List<Plant> currentPlants)
@@ -308,14 +301,6 @@ namespace MyPlantPal
                 }
             }
         }
-
-
-
-
-
-
-
-
 
     }
 
