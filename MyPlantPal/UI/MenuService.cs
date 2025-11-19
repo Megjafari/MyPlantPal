@@ -251,5 +251,21 @@ namespace MyPlantPal.UI
                 new TextPrompt<string>("Press [green]Enter[/] to continue...")
                     .AllowEmpty());
         }
+        public string AskForPlantToRemove(List<Plant> plants)
+        {
+            if (plants.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[yellow]No plants available to remove![/]");
+                return null;
+            }
+
+            var plantOptions = plants.Select(p => p.Name).ToList();
+            plantOptions.Add(" Back");
+
+            return AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[red]Select plant to remove:[/]")
+                    .AddChoices(plantOptions));
+        }
     }
 }
