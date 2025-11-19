@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "Id": "d3d371fa-72e1-493e-ad9a-f433620eac19",
+    "Name": "Snake Plant",
+    "Species": "Sansevieria trifasciata",
+    "OwnerUsername": "Alex",
+    "LastWatered": "2025-11-19T21:55:21.4179763+01:00",
+    "WateringIntervalDays": 14,
+    "NextWateringDate": "2025-12-03T21:55:21.4179763+01:00",
+    "NeedsWatering": false
+  }
+]

@@ -1,10 +1,21 @@
-﻿namespace MyPlantPal
+﻿using MyPlantPal.Services;
+using MyPlantPal.UI;
+
+namespace MyPlantPal
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            var dataStore = new DataStore();
+
+            var userService = new UserService(dataStore);
+            var plantService = new PlantService(dataStore);
+
+            var menuService = new MenuService();
+
+            var appController = new AppController(menuService, userService, plantService);
+            appController.Run();
         }
     }
 }

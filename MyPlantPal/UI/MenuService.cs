@@ -8,6 +8,8 @@ namespace MyPlantPal.UI
 {
     public class MenuService
     {
+        // --- 1. Main navigation menus ---
+
         public string ShowStartMenu()
         {
             AnsiConsole.Clear();
@@ -59,24 +61,43 @@ namespace MyPlantPal.UI
                     }));
         }
 
-        public Plant ShowPlantTemplates(List<Plant> templates)
+        // --- 2. Input Forms (Login/Register/Custom Plant) ---
+
+        // Method used by AppController for registration
+        public (string username, string password) ShowRegistrationForm()
         {
-            var templateOptions = templates.Select(t =>
-                $"{t.Name} - {t.Species} ( every {t.WateringIntervalDays} days)").ToList();
-            templateOptions.Add(" Back");
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+                new FigletText("Register")
+                    .LeftJustified()
+                    .Color(Color.Green));
 
-            var choice = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("[green]Choose a plant from our library:[/]")
-                    .PageSize(15)
-                    .AddChoices(templateOptions));
+            var username = AnsiConsole.Ask<string>("[yellow]Enter username:[/]");
+            var password = AnsiConsole.Prompt(
+                new TextPrompt<string>("[yellow]Enter password:[/]")
+                    .Secret());
 
-            if (choice == "← Back") return null;
-
-            var selectedIndex = templateOptions.IndexOf(choice);
-            return templates[selectedIndex];
+            return (username, password);
         }
 
+        // Method used by AppController to log in
+        public (string username, string password) ShowLoginForm()
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(
+                new FigletText("Login")
+                    .LeftJustified()
+                    .Color(Color.Green));
+
+            var username = AnsiConsole.Ask<string>("[yellow]Enter username:[/]");
+            var password = AnsiConsole.Prompt(
+                new TextPrompt<string>("[yellow]Enter password:[/]")
+                    .Secret());
+
+            return (username, password);
+        }
+
+        // Form for adding a custom plant
         public (string name, string species, int interval) ShowCustomPlantForm()
         {
             AnsiConsole.Clear();
@@ -90,6 +111,26 @@ namespace MyPlantPal.UI
             var interval = AnsiConsole.Ask<int>("[yellow]Watering interval (days):[/]");
 
             return (name, species, interval);
+        }
+
+        // --- 3. Displaying data and messages ---
+
+        public Plant? ShowPlantTemplates(List<Plant> templates)
+        {
+            var templateOptions = templates.Select(t =>
+                $"{t.Name} - {t.Species} ( every {t.WateringIntervalDays} days)").ToList();
+            templateOptions.Add("← Back");
+
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[green]Choose a plant from our library:[/]")
+                    .PageSize(15)
+                    .AddChoices(templateOptions));
+
+            if (choice == "← Back") return null;
+
+            var selectedIndex = templateOptions.IndexOf(choice);
+            return templates[selectedIndex];
         }
 
         public void DisplayPlantsTable(List<Plant> plants)
@@ -167,10 +208,10 @@ namespace MyPlantPal.UI
                 [blue]Total Plants:[/] {stats.TotalPlants}
                 [red]Need Water:[/] {stats.PlantsNeedingWater}
                 [green]Watered Today:[/] {stats.PlantsWateredToday}
-                [yellow]Average Interval:[/] {stats.AverageWateringInterval} days
+                [yellow]Average Interval:[/] {stats.AverageWateringInterval:F1} days
                 [purple]Most Common:[/] {stats.MostCommonPlantType}
-                [orange1]Thirsty Plants:[/] {stats.MostThirstyPlantCount}
-                [springgreen1]Healthy Plants:[/] {stats.HealthiestPlantCount}"
+                [orange1]Thirsty Plants (<=3 days):[/] {stats.MostThirstyPlantCount}
+                [springgreen1]Healthy Plants (Not overdue):[/] {stats.HealthiestPlantCount}"
             )
             .Header(" Your Plant Health")
             .BorderColor(Color.Green)
@@ -189,6 +230,9 @@ namespace MyPlantPal.UI
                     .Title("[green]Select plant to water:[/]")
                     .AddChoices(plantOptions));
         }
+
+        // --- 4. Messages and waiting for input ---
+
 
         public void ShowSuccessMessage(string message)
         {

@@ -31,7 +31,7 @@ namespace MyPlantPal.Services
 
         // --- Business Logic ---
 
-        public bool RegisterUser(string username, string password)
+        public bool Register(string username, string password)
         {
             if (_users.Any(u => u.Username.ToLower() == username.ToLower()))
             {
