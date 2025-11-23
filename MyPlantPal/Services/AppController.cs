@@ -58,29 +58,43 @@ namespace MyPlantPal
         {
             AnsiConsole.Clear();
             var (username, password) = _menuService.ShowRegistrationForm();
+            try
+            {
+                if (_userService.Register(username, password))
+                {
+                    _menuService.ShowSuccessMessage($"User {username} registered successfully!");
+                }
+                else
+                {
+                    _menuService.ShowErrorMessage 
+                ("Registration failed! Username already exists or password is too weak.\n" +
+                "Password must be at least 6 characters long and contain:\n" +
+                "-At least one number (0-9)\n" +
+                "-At least one uppercase letter (A-Z)");
+                }
+            }
+            catch (Exception ex)
+            {
+                _menuService.ShowErrorMessage($"Registration failed: {ex.Message}");
+            }
 
-            if (_userService.Register(username, password))
-            {
-                _menuService.ShowSuccessMessage($"User {username} registered successfully!");
-            }
-            else
-            {
-                _menuService.ShowErrorMessage("Registration failed. Username already exists.");
-            }
+            _menuService.WaitForContinue();
         }
 
         private bool HandleLogin()
         {
-            AnsiConsole.Clear();
-            var (username, password) = _menuService.ShowLoginForm();
-
-            var user = _userService.Login(username, password);
-            if (user != null)
+            while (true)
             {
-                _currentUser = user;
+                AnsiConsole.Clear();
+                var (username, password) = _menuService.ShowLoginForm();
 
-                // --- PROGRESS SIMULATION (Optional loading screen) ---
-                AnsiConsole.Progress()
+                var user = _userService.Login(username, password);
+                if (user != null)
+                {
+                    _currentUser = user;
+
+                    // --- PROGRESS SIMULATION (Optional loading screen) ---
+                    AnsiConsole.Progress()
                     .Start(ctx =>
                     {
                         var task1 = ctx.AddTask("[green]Authenticating user data[/]");
@@ -94,18 +108,19 @@ namespace MyPlantPal
                             Thread.Sleep(8);
                         }
                     });
-                // --------------------------------------------------
-
-                _menuService.ShowSuccessMessage($"Welcome back, {username}!");
-                return true;
-            }
-            else
-            {
-                _menuService.ShowErrorMessage("Login failed. Invalid credentials.");
-                return false;
+                    _menuService.ShowSuccessMessage($"Welcome back, {username}!");
+                    return true;
+                }
+                else
+                {
+                    _menuService.ShowErrorMessage("Login failed. Invalid credentials.");
+                    _menuService.WaitForContinue();
+                    var shouldContinue = AnsiConsole.Confirm("Would you like to try again?");
+                    if (!shouldContinue)
+                        return false;
+                }
             }
         }
-
         // --- 3. Main Menu Loop and Navigation ---
 
         private void ShowMainMenuLoop()
