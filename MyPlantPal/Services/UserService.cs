@@ -37,11 +37,30 @@ namespace MyPlantPal.Services
             {
                 return false; // User already exists
             }
-
+            if (!IsPasswordValid(password))
+            {
+                return false; // Password validation failed
+            }
             var newUser = new User(username, password);
             _users.Add(newUser);
 
             SaveUsers(); // Save changes to JSON
+
+            return true;
+        }
+        private bool IsPasswordValid(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+                return false;
+
+            if (password.Length < 6)    // Minimum length: 6 characters
+                return false;
+
+            if (!password.Any(char.IsDigit))    // Must contain at least ONE digit
+                return false;
+
+            if (!password.Any(char.IsUpper))    // Must contain at least ONE uppercase letter
+                return false;
 
             return true;
         }
