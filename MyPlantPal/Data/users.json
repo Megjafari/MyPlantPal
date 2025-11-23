@@ -8,5 +8,10 @@
     "username": "Alex",
     "password": "123",
     "date_time_created": "2025-11-19T21:54:57.7822923+01:00"
+  },
+  {
+    "username": "Nemo",
+    "password": "4444",
+    "date_time_created": "2025-11-23T16:41:26.1390907+01:00"
   }
 ]

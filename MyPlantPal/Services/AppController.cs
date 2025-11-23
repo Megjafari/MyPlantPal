@@ -4,6 +4,7 @@ using MyPlantPal.UI;
 using Spectre.Console;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace MyPlantPal
 {
@@ -14,6 +15,7 @@ namespace MyPlantPal
         private readonly PlantService _plantService;
         private User? _currentUser;
 
+        // Constructor: Receives all necessary services via Dependency Injection (DI)
         public AppController(MenuService menuService, UserService userService, PlantService plantService)
         {
             _menuService = menuService;
@@ -28,6 +30,7 @@ namespace MyPlantPal
         {
             string choice;
 
+            // Loop for the initial Start Menu (Login/Register/Exit)
             while (true)
             {
                 choice = _menuService.ShowStartMenu();
@@ -42,7 +45,7 @@ namespace MyPlantPal
                 {
                     if (HandleLogin())
                     {
-                        ShowMainMenuLoop();
+                        ShowMainMenuLoop(); // Move to Main Menu upon successful login
                     }
                 }
             }
@@ -62,7 +65,6 @@ namespace MyPlantPal
             }
             else
             {
-                
                 _menuService.ShowErrorMessage("Registration failed. Username already exists.");
             }
         }
@@ -76,6 +78,24 @@ namespace MyPlantPal
             if (user != null)
             {
                 _currentUser = user;
+
+                // --- PROGRESS SIMULATION (Optional loading screen) ---
+                AnsiConsole.Progress()
+                    .Start(ctx =>
+                    {
+                        var task1 = ctx.AddTask("[green]Authenticating user data[/]");
+                        var task2 = ctx.AddTask("[green]Loading Your Virtual Garden[/]");
+
+                        // Simulate work until both tasks are complete
+                        while (!ctx.IsFinished)
+                        {
+                            task1.Increment(0.9);
+                            task2.Increment(0.5);
+                            Thread.Sleep(8);
+                        }
+                    });
+                // --------------------------------------------------
+
                 _menuService.ShowSuccessMessage($"Welcome back, {username}!");
                 return true;
             }
@@ -93,8 +113,15 @@ namespace MyPlantPal
             string choice;
             while (_currentUser != null)
             {
-                DisplayUserStats();
+                // CLEAR SCREEN AND DISPLAY WELCOME HEADER
+                AnsiConsole.Clear();
+                AnsiConsole.MarkupLine($"[bold green]Welcome back, {_currentUser.Username}![/]");
+                AnsiConsole.WriteLine();
+                // --------------------------------------------
 
+                // REMOVED: DisplayUserStats() is now removed from the main loop!
+
+                // Display menu options
                 choice = _menuService.ShowMainMenu();
 
                 switch (choice)
@@ -109,7 +136,10 @@ namespace MyPlantPal
                         HandleWateringTasks();
                         break;
                     case "Statistics":
+                        // FIX: Statistics are now displayed only when requested
                         AnsiConsole.Clear();
+                        AnsiConsole.MarkupLine($"[bold green]Statistics for {_currentUser.Username}[/]");
+                        AnsiConsole.WriteLine();
                         DisplayUserStats();
                         break;
                     case "Logout":
@@ -130,6 +160,7 @@ namespace MyPlantPal
         private void DisplayUserStats()
         {
             if (_currentUser == null) return;
+            // Get stats from PlantService and display them using MenuService
             var stats = _plantService.GetPlantStatistics(_currentUser.Username);
             _menuService.DisplayStatistics(stats);
         }
@@ -143,18 +174,18 @@ namespace MyPlantPal
 
             if (plants.Count > 0)
             {
-                // Add option to remove a plant after viewing the list
+                // Option to remove a plant after viewing the list
                 var choice = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
                         .Title("[green]Options[/]")
                         .AddChoices(new[] {
-                    "Remove Plant", // New option
+                    "Remove Plant",
                     "Back to Main Menu"
                         }));
 
                 if (choice == "Remove Plant")
                 {
-                    HandleRemovePlant(plants); // Call the new handler
+                    HandleRemovePlant(plants); // Call the remove handler
                 }
             }
         }
@@ -191,6 +222,7 @@ namespace MyPlantPal
 
             if (selectedTemplate != null)
             {
+                // Add the plant to the user's data (saves to plants.json)
                 bool success = _plantService.AddPlant(
                     selectedTemplate.Name,
                     selectedTemplate.Species,
@@ -213,6 +245,7 @@ namespace MyPlantPal
         {
             var (name, species, interval) = _menuService.ShowCustomPlantForm();
 
+            // Add the custom plant
             bool success = _plantService.AddPlant(
                 name,
                 species,
@@ -235,6 +268,7 @@ namespace MyPlantPal
             if (_currentUser == null) return;
             AnsiConsole.Clear();
 
+            // Get plants that need watering
             var plantsNeedingWater = _plantService.GetPlantsNeedingWater(_currentUser.Username);
             _menuService.DisplayWateringTasks(plantsNeedingWater);
 
@@ -242,12 +276,13 @@ namespace MyPlantPal
             {
                 var plantNameChoice = _menuService.AskForPlantToWater(plantsNeedingWater);
 
-                if (plantNameChoice == " Back") return;
+                if (plantNameChoice == null || plantNameChoice == " Back") return;
 
                 var plantToWater = plantsNeedingWater.FirstOrDefault(p => p.Name == plantNameChoice);
 
                 if (plantToWater != null)
                 {
+                    // Call the service method to update LastWatered and save the file
                     bool success = _plantService.WaterPlant(plantToWater.Id, _currentUser.Username);
 
                     if (success)
@@ -301,7 +336,5 @@ namespace MyPlantPal
                 }
             }
         }
-
     }
-
 }
