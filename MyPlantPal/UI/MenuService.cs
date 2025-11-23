@@ -1,5 +1,5 @@
 ﻿using Spectre.Console;
-using MyPlantPal.Models;
+using MyPlantPal.Models; // CRITICAL: Ensures Plant and Plantstatistics are found
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,10 +34,10 @@ namespace MyPlantPal.UI
 
         public string ShowMainMenu()
         {
-            AnsiConsole.Clear();
+            // FIX: Removed AnsiConsole.Clear() to allow AppController to draw the header/stats first.
             return AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                    .Title("[green] Main Menu[/]")
+                    .Title(" ") // FIX: Set title to empty to avoid visual clutter with the header
                     .PageSize(10)
                     .AddChoices(new[] {
                         "My Plants",
@@ -63,7 +63,6 @@ namespace MyPlantPal.UI
 
         // --- 2. Input Forms (Login/Register/Custom Plant) ---
 
-        // Method used by AppController for registration
         public (string username, string password) ShowRegistrationForm()
         {
             AnsiConsole.Clear();
@@ -80,7 +79,6 @@ namespace MyPlantPal.UI
             return (username, password);
         }
 
-        // Method used by AppController to log in
         public (string username, string password) ShowLoginForm()
         {
             AnsiConsole.Clear();
@@ -97,7 +95,6 @@ namespace MyPlantPal.UI
             return (username, password);
         }
 
-        // Form for adding a custom plant
         public (string name, string species, int interval) ShowCustomPlantForm()
         {
             AnsiConsole.Clear();
@@ -115,6 +112,7 @@ namespace MyPlantPal.UI
 
         // --- 3. Displaying data and messages ---
 
+        // FIX: Returns Plant? to handle null selection.
         public Plant? ShowPlantTemplates(List<Plant> templates)
         {
             var templateOptions = templates.Select(t =>
@@ -220,19 +218,43 @@ namespace MyPlantPal.UI
             AnsiConsole.Write(panel);
         }
 
-        public string AskForPlantToWater(List<Plant> plantsNeedingWater)
+        // FIX: Returns string? to handle null selection.
+        public string? AskForPlantToWater(List<Plant> plantsNeedingWater)
         {
             var plantOptions = plantsNeedingWater.Select(p => p.Name).ToList();
-            plantOptions.Add(" Back");
+            plantOptions.Add("← Back");
 
-            return AnsiConsole.Prompt(
+            var choice = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("[green]Select plant to water:[/]")
                     .AddChoices(plantOptions));
+
+            if (choice == "← Back") return null;
+            return choice;
+        }
+
+        // FIX: Returns string? to handle null selection.
+        public string? AskForPlantToRemove(List<Plant> plants)
+        {
+            if (plants.Count == 0)
+            {
+                AnsiConsole.MarkupLine("[yellow]No plants available to remove![/]");
+                return null;
+            }
+
+            var plantOptions = plants.Select(p => p.Name).ToList();
+            plantOptions.Add("← Back");
+
+            var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[red]Select plant to remove:[/]")
+                    .AddChoices(plantOptions));
+
+            if (choice == "← Back") return null;
+            return choice;
         }
 
         // --- 4. Messages and waiting for input ---
-
 
         public void ShowSuccessMessage(string message)
         {
@@ -250,22 +272,6 @@ namespace MyPlantPal.UI
             AnsiConsole.Prompt(
                 new TextPrompt<string>("Press [green]Enter[/] to continue...")
                     .AllowEmpty());
-        }
-        public string AskForPlantToRemove(List<Plant> plants)
-        {
-            if (plants.Count == 0)
-            {
-                AnsiConsole.MarkupLine("[yellow]No plants available to remove![/]");
-                return null;
-            }
-
-            var plantOptions = plants.Select(p => p.Name).ToList();
-            plantOptions.Add(" Back");
-
-            return AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("[red]Select plant to remove:[/]")
-                    .AddChoices(plantOptions));
         }
     }
 }

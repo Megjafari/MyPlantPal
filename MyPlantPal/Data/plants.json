@@ -8,5 +8,16 @@
     "WateringIntervalDays": 14,
     "NextWateringDate": "2025-12-03T23:00:16.0494574+01:00",
     "NeedsWatering": false
+  },
+  
+  {
+    "Id": "d037627c-1aa7-4191-9b9c-081976863007",
+    "Name": "Basil",
+    "Species": "Ocimum basilicum",
+    "OwnerUsername": "Alex",
+    "LastWatered": "2025-11-23T17:17:33.0944987+01:00",
+    "WateringIntervalDays": 3,
+    "NextWateringDate": "2025-11-26T17:17:33.0944987+01:00",
+    "NeedsWatering": false
   }
 ]
