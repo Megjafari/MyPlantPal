@@ -1,6 +1,8 @@
 ﻿using MyPlantPal.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography; // Required for hashing
+using System.Text;
 
 namespace MyPlantPal.Services
 {
@@ -28,6 +30,18 @@ namespace MyPlantPal.Services
         {
             _dataStore.SaveToFile(UserDataFileName, _users);
         }
+        // - Hashing Helper Method -
+        private static string HashPassword(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(bytes);
+            }
+        }
+
+
+
 
         // --- Business Logic ---
 
@@ -41,7 +55,10 @@ namespace MyPlantPal.Services
             {
                 return false; // Password validation failed
             }
-            var newUser = new User(username, password);
+            //  Hash the password before creating the user
+            var passwordHash = HashPassword(password);
+
+            var newUser = new User(username, passwordHash);
             _users.Add(newUser);
 
             SaveUsers(); // Save changes to JSON
@@ -69,9 +86,16 @@ namespace MyPlantPal.Services
         {
             var user = _users.FirstOrDefault(u => u.Username.ToLower() == username.ToLower());
 
-            if (user != null && user.Password == password)
+            if (user != null)
             {
-                return user;
+                //  Hash the input password to compare
+                var inputHash = HashPassword(password);
+
+                if (user.Password == inputHash)
+                {
+                    return user;
+                }
+
             }
 
             return null;
