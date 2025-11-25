@@ -1,5 +1,7 @@
 # MyPlantPal
 
+![.NET Build](https://github.com/megjafari/MyPlantPal/actions/workflows/build.yml/badge.svg)
+
 <img width="597" height="587" alt="filstruktur" src="https://github.com/user-attachments/assets/beb34b9d-8940-4dcd-9201-985e6ef2f0ba" />
 
 
