@@ -56,31 +56,38 @@ namespace MyPlantPal
 
         private void HandleRegistration()
         {
-            AnsiConsole.Clear();
-            var (username, password) = _menuService.ShowRegistrationForm();
-            try
-            {
-                if (_userService.Register(username, password))
+            while (true)
+            {    
+                AnsiConsole.Clear();
+                var (username, password) = _menuService.ShowRegistrationForm();
+                try
                 {
-                    _menuService.ShowSuccessMessage($"User {username} registered successfully!");
+                    if (_userService.Register(username, password))
+                    {
+                        _menuService.ShowSuccessMessage($"User {username} registered successfully!");
+                        return;
+                    }
+                    else
+                    {
+                        _menuService.ShowErrorMessage 
+                        ("Registration failed! Username already exists or password is too weak.\n" +
+                        "Password must be at least 6 characters long and contain:\n" +
+                        "-At least one number (0-9)\n" +
+                        "-At least one uppercase letter (A-Z)");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    _menuService.ShowErrorMessage 
-                ("Registration failed! Username already exists or password is too weak.\n" +
-                "Password must be at least 6 characters long and contain:\n" +
-                "-At least one number (0-9)\n" +
-                "-At least one uppercase letter (A-Z)");
+                    _menuService.ShowErrorMessage($"Registration failed: {ex.Message}");
                 }
-            }
-            catch (Exception ex)
-            {
-                _menuService.ShowErrorMessage($"Registration failed: {ex.Message}");
-            }
+                var choice = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .AddChoices(new[] { "Try again", "Back to Start Menu" }));
 
-            _menuService.WaitForContinue();
+                if (choice == "Back to Start Menu")
+                    return;
+            }
         }
-
         private bool HandleLogin()
         {
             while (true)
@@ -115,8 +122,11 @@ namespace MyPlantPal
                 {
                     _menuService.ShowErrorMessage("Login failed. Invalid credentials.");
                     _menuService.WaitForContinue();
-                    var shouldContinue = AnsiConsole.Confirm("Would you like to try again?");
-                    if (!shouldContinue)
+                    var choice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .AddChoices(new[] { "Try again", "Back to Start Menu" }));
+
+                    if (choice == "Back to Start Menu")
                         return false;
                 }
             }
@@ -258,7 +268,8 @@ namespace MyPlantPal
 
         private void HandleAddCustomPlant()
         {
-            var (name, species, interval) = _menuService.ShowCustomPlantForm();
+            var (name, species, interval, goBack) = _menuService.ShowCustomPlantForm();
+            if (goBack) return;
 
             // Add the custom plant
             bool success = _plantService.AddPlant(

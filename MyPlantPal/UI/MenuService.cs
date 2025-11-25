@@ -95,7 +95,7 @@ namespace MyPlantPal.UI
             return (username, password);
         }
 
-        public (string name, string species, int interval) ShowCustomPlantForm()
+        public (string name, string species, int interval, bool goBack) ShowCustomPlantForm()
         {
             AnsiConsole.Clear();
             AnsiConsole.Write(
@@ -103,11 +103,24 @@ namespace MyPlantPal.UI
                     .LeftJustified()
                     .Color(Color.Blue));
 
+            // Fråga först om användaren vill fortsätta eller gå tillbaka
+            var actionChoice = AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[green]What would you like to do?[/]")
+                    .AddChoices(new[] {
+                "Add a custom plant",
+                "Back to Plant Menu"
+                    }));
+
+            
+            if (actionChoice == "Back to Plant Menu")
+                return (null, null, 0, true);
+
             var name = AnsiConsole.Ask<string>("[yellow]Plant name:[/]");
             var species = AnsiConsole.Ask<string>("[yellow]Plant species:[/]");
             var interval = AnsiConsole.Ask<int>("[yellow]Watering interval (days):[/]");
 
-            return (name, species, interval);
+            return (name, species, interval, false);
         }
 
         // --- 3. Displaying data and messages ---
