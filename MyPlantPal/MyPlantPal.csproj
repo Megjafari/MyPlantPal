@@ -17,8 +17,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include=".github\workflows\build.yml" />
-  </ItemGroup>
-
 </Project>
