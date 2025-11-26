@@ -44,7 +44,7 @@ namespace MyPlantPal.Services
         {
             var plant = new Plant(template.Name, template.Species, ownerUsername)
             {
-                WateringIntervalDays = template.WateringIntervalDays
+                WateringIntervalDays = GetSeasonAdjustedInterval(template.WateringIntervalDays)
             };
             return plant;
         }
@@ -199,6 +199,16 @@ namespace MyPlantPal.Services
             _plants.Add(plant);
             SavePlants();
             return true;
+        }
+        private int GetSeasonAdjustedInterval(int baseInterval)
+        {
+            var currentMonth = DateTime.Now.Month;
+            // WINTER (Nov-Feb): 50% Less watering
+            if (currentMonth >= 11 || currentMonth <= 2)
+            {
+                return (int)(baseInterval * 1.5);
+            }
+            return baseInterval;
         }
     }
 }
