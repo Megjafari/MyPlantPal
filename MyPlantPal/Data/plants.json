@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "Id": "908c5476-6b32-46e2-86e8-a4c864515109",
+    "Name": "Snake Plant",
+    "Species": "Sansevieria trifasciata",
+    "OwnerUsername": "TestTest1",
+    "LastWatered": "2025-11-26T14:52:34.0232112+01:00",
+    "WateringIntervalDays": 14,
+    "NextWateringDate": "2025-12-17T14:52:34.0232112+01:00",
+    "NeedsWatering": false
+  },
+  {
+    "Id": "b12c74c4-955c-437f-9a3a-0d2e9605d09c",
+    "Name": "Spider Plant",
+    "Species": "Chlorophytum comosum",
+    "OwnerUsername": "TestTemp",
+    "LastWatered": "2025-11-26T21:03:29.2042348+01:00",
+    "WateringIntervalDays": 7,
+    "NextWateringDate": "2025-12-06T21:03:29.2042348+01:00",
+    "NeedsWatering": false
+  }
+]
