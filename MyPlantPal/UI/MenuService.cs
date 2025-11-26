@@ -129,7 +129,8 @@ namespace MyPlantPal.UI
         public Plant? ShowPlantTemplates(List<Plant> templates)
         {
             var templateOptions = templates.Select(t =>
-                $"{t.Name} - {t.Species} ( every {t.WateringIntervalDays} days)").ToList();
+            $"{t.Name} - {t.Species}").ToList();
+
             templateOptions.Add("← Back");
 
             var choice = AnsiConsole.Prompt(
