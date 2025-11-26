@@ -111,10 +111,10 @@ namespace MyPlantPal.UI
                 "Add a custom plant",
                 "Back to Plant Menu"
                     }));
-
-            
+            //fixed
             if (actionChoice == "Back to Plant Menu")
-                return (null, null, 0, true);
+                
+                return (string.Empty, string.Empty, 0, true);
 
             var name = AnsiConsole.Ask<string>("[yellow]Plant name:[/]");
             var species = AnsiConsole.Ask<string>("[yellow]Plant species:[/]");

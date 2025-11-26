@@ -18,5 +18,15 @@
     "WateringIntervalDays": 7,
     "NextWateringDate": "2025-12-06T21:03:29.2042348+01:00",
     "NeedsWatering": false
+  },
+  {
+    "Id": "7e93f376-1d48-4f3c-aeff-825ca6bb4cd4",
+    "Name": "Snake Plant",
+    "Species": "Sansevieria trifasciata",
+    "OwnerUsername": "TestTempo",
+    "LastWatered": "2025-11-26T21:28:51.1066789+01:00",
+    "WateringIntervalDays": 14,
+    "NextWateringDate": "2025-12-17T21:28:51.1066789+01:00",
+    "NeedsWatering": false
   }
 ]
