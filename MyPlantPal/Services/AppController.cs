@@ -45,6 +45,7 @@ namespace MyPlantPal
                 {
                     if (HandleLogin())
                     {
+                        
                         ShowMainMenuLoop(); // Move to Main Menu upon successful login
                     }
                 }
@@ -65,6 +66,7 @@ namespace MyPlantPal
                     if (_userService.Register(username, password))
                     {
                         _menuService.ShowSuccessMessage($"User {username} registered successfully!");
+                        _menuService.WaitForContinue();
                         return;
                     }
                     else
@@ -138,15 +140,29 @@ namespace MyPlantPal
             string choice;
             while (_currentUser != null)
             {
-                // CLEAR SCREEN AND DISPLAY WELCOME HEADER
+                // 1. Clear screen
                 AnsiConsole.Clear();
+
+                // 2. Welcome Header
                 AnsiConsole.MarkupLine($"[bold green]Welcome back, {_currentUser.Username}![/]");
-                AnsiConsole.WriteLine();
-                // --------------------------------------------
 
-                // REMOVED: DisplayUserStats() is now removed from the main loop!
+                // --- SEASONAL INDICATOR (RESTORED) ---
+                int currentMonth = DateTime.Now.Month;
+                if (currentMonth >= 11 || currentMonth <= 2)
+                {
+                    // Winter Mode
+                    AnsiConsole.MarkupLine("[blue]Winter Mode: Watering less frequently[/]");
+                }
+                else
+                {
+                    // Standard/Summer Mode
+                    AnsiConsole.MarkupLine("[yellow]Standard Mode: Normal watering schedule[/]");
+                }
+                // -------------------------------------
 
-                // Display menu options
+                AnsiConsole.WriteLine(); // Empty line for spacing
+
+                // 3. Display Menu
                 choice = _menuService.ShowMainMenu();
 
                 switch (choice)
@@ -161,7 +177,7 @@ namespace MyPlantPal
                         HandleWateringTasks();
                         break;
                     case "Statistics":
-                        // FIX: Statistics are now displayed only when requested
+                        // Statistics open as a separate screen
                         AnsiConsole.Clear();
                         AnsiConsole.MarkupLine($"[bold green]Statistics for {_currentUser.Username}[/]");
                         AnsiConsole.WriteLine();
