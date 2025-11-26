@@ -1,23 +1,32 @@
 [
   {
-    "Id": "6dd08010-6c02-45a0-8e5b-268ba076e1b0",
-    "Name": "ZZ Plant",
-    "Species": "Zamioculcas zamiifolia",
-    "OwnerUsername": "Alex",
-    "LastWatered": "2025-11-19T23:00:16.0494574+01:00",
+    "Id": "908c5476-6b32-46e2-86e8-a4c864515109",
+    "Name": "Snake Plant",
+    "Species": "Sansevieria trifasciata",
+    "OwnerUsername": "TestTest1",
+    "LastWatered": "2025-11-26T14:52:34.0232112+01:00",
     "WateringIntervalDays": 14,
-    "NextWateringDate": "2025-12-03T23:00:16.0494574+01:00",
+    "NextWateringDate": "2025-12-17T14:52:34.0232112+01:00",
     "NeedsWatering": false
   },
-  
   {
-    "Id": "d037627c-1aa7-4191-9b9c-081976863007",
-    "Name": "Basil",
-    "Species": "Ocimum basilicum",
-    "OwnerUsername": "Alex",
-    "LastWatered": "2025-11-23T17:17:33.0944987+01:00",
-    "WateringIntervalDays": 3,
-    "NextWateringDate": "2025-11-26T17:17:33.0944987+01:00",
+    "Id": "b12c74c4-955c-437f-9a3a-0d2e9605d09c",
+    "Name": "Spider Plant",
+    "Species": "Chlorophytum comosum",
+    "OwnerUsername": "TestTemp",
+    "LastWatered": "2025-11-26T21:03:29.2042348+01:00",
+    "WateringIntervalDays": 7,
+    "NextWateringDate": "2025-12-06T21:03:29.2042348+01:00",
+    "NeedsWatering": false
+  },
+  {
+    "Id": "7e93f376-1d48-4f3c-aeff-825ca6bb4cd4",
+    "Name": "Snake Plant",
+    "Species": "Sansevieria trifasciata",
+    "OwnerUsername": "TestTempo",
+    "LastWatered": "2025-11-26T21:28:51.1066789+01:00",
+    "WateringIntervalDays": 14,
+    "NextWateringDate": "2025-12-17T21:28:51.1066789+01:00",
     "NeedsWatering": false
   }
 ]

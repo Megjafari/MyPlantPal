@@ -111,10 +111,10 @@ namespace MyPlantPal.UI
                 "Add a custom plant",
                 "Back to Plant Menu"
                     }));
-
-            
+            //fixed
             if (actionChoice == "Back to Plant Menu")
-                return (null, null, 0, true);
+                
+                return (string.Empty, string.Empty, 0, true);
 
             var name = AnsiConsole.Ask<string>("[yellow]Plant name:[/]");
             var species = AnsiConsole.Ask<string>("[yellow]Plant species:[/]");
@@ -126,8 +126,10 @@ namespace MyPlantPal.UI
         // --- 3. Displaying data and messages ---
 
         // FIX: Returns Plant? to handle null selection.
+       
         public Plant? ShowPlantTemplates(List<Plant> templates)
         {
+            // Display both standard and winter intervals to inform the user
             var templateOptions = templates.Select(t =>
             $"{t.Name} - {t.Species}").ToList();
 
@@ -159,12 +161,32 @@ namespace MyPlantPal.UI
 
             table.AddColumn(new TableColumn("[yellow]Name[/]").Centered());
             table.AddColumn(new TableColumn("[yellow]Species[/]").Centered());
+
+            // New column to show seasonal schedule changes
+            table.AddColumn(new TableColumn("[yellow]Schedule[/]").Centered());
+
             table.AddColumn(new TableColumn("[yellow]Last Watered[/]").Centered());
             table.AddColumn(new TableColumn("[yellow]Next Watering[/]").Centered());
             table.AddColumn(new TableColumn("[yellow]Status[/]").Centered());
 
             foreach (var plant in plants)
             {
+                // Calculate current active interval
+                var currentInterval = (plant.NextWateringDate - plant.LastWatered).Days;
+                var baseInterval = plant.WateringIntervalDays;
+
+                string scheduleDisplay;
+
+                if (currentInterval != baseInterval)
+                {
+                    // Show change if seasonal logic is active
+                    scheduleDisplay = $"[blue]{baseInterval} -> {currentInterval} days[/]";
+                }
+                else
+                {
+                    scheduleDisplay = $"{baseInterval} days";
+                }
+
                 var status = plant.NeedsWatering ?
                     new Markup("[red] NEEDS WATER[/]") :
                     new Markup("[green] OK[/]");
@@ -172,6 +194,7 @@ namespace MyPlantPal.UI
                 table.AddRow(
                     new Text(plant.Name),
                     new Text(plant.Species),
+                    new Markup(scheduleDisplay), // Add the schedule info here
                     new Text(plant.LastWatered.ToString("yyyy-MM-dd")),
                     new Text(plant.NextWateringDate.ToString("yyyy-MM-dd")),
                     status
