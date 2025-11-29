@@ -132,10 +132,7 @@ namespace MyPlantPal.UI
         {
             // Display both standard and winter intervals to inform the user
             var templateOptions = templates.Select(t =>
-            {
-                int winterInterval = (int)(t.WateringIntervalDays * 1.5);
-                return $"{t.Name} - {t.Species} (Std: {t.WateringIntervalDays}d | Winter: {winterInterval}d)";
-            }).ToList();
+            $"{t.Name} - {t.Species}").ToList();
 
             templateOptions.Add("← Back");
 

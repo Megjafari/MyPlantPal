@@ -268,17 +268,36 @@ namespace MyPlantPal
 
             if (selectedTemplate != null)
             {
+                var currentMonth = DateTime.Now.Month;
+                var adjustedInterval = currentMonth >= 11 || currentMonth <= 2
+                    ? (int)(selectedTemplate.WateringIntervalDays * 1.5)
+                    : selectedTemplate.WateringIntervalDays;
+
                 // Add the plant to the user's data (saves to plants.json)
                 bool success = _plantService.AddPlant(
                     selectedTemplate.Name,
                     selectedTemplate.Species,
                     _currentUser!.Username,
-                    selectedTemplate.WateringIntervalDays
+                    adjustedInterval
                 );
+                string seasonMessage;
+
+                if (DateTime.Now.Month is 11 or 12 or 1 or 2 or 3)// Winter months
+                {
+                    seasonMessage =
+                        $"[aqua]Winter detected.[/] " +
+                        $"Recommended watering interval has been increased to [yellow]{adjustedInterval} days[/].";
+                }
+                else
+                {
+                    seasonMessage =
+                        $"Recommended watering interval: [green]{adjustedInterval} days[/].";
+                }
+
 
                 if (success)
                 {
-                    _menuService.ShowSuccessMessage($"Plant '{selectedTemplate.Name}' added and saved!");
+                    _menuService.ShowSuccessMessage($"Plant '{selectedTemplate.Name}' added and saved!\n\n{seasonMessage}");
                 }
                 else
                 {
