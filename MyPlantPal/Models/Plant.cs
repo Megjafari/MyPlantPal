@@ -42,14 +42,14 @@ namespace MyPlantPal.Models
         }
 
         // Calculated property: Is it time to water the plant now?
-        public bool NeedsWatering => DateTime.Now >= NextWateringDate;
+        public bool NeedsWatering => DateTime.UtcNow >= NextWateringDate;
 
         // --- Constructors ---
 
         public Plant()
         {
             Id = Guid.NewGuid().ToString();
-            LastWatered = DateTime.Now;
+            LastWatered = DateTime.UtcNow;
             WateringIntervalDays = 7; // Default
         }
 
