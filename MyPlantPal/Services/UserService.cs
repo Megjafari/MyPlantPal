@@ -123,7 +123,42 @@ namespace MyPlantPal.Services
 
             return true;
         }
+        public bool ChangePassword(string username, string oldPassword, string newPassword, out string message)
+        {
+            var user = _users.FirstOrDefault(u => u.Username.ToLower() == username.ToLower());
 
+            if (user == null)
+            {
+                message = "User not found.";
+                return false;
+            }
+            
+            var oldHash = HashPassword(oldPassword); //Verify the current password (by hashing the input and comparing to the stored hash
+            if (user.Password != oldHash)
+            {
+                message = "Incorrect current password. Operation cancelled.";
+                return false;
+            }
+            
+            if (!IsPasswordValid(newPassword)) //Validate the new password using your existing IsPasswordValid method
+            {
+                message = "The new password is not strong enough. Requirements: Min 6 chars, one uppercase, one digit.";
+                return false;
+            }
+
+            if (oldPassword == newPassword)
+            {
+                message = "The new password must be different from the old one.";
+                return false;
+            }
+
+            var newHash = HashPassword(newPassword);  //Hash and update
+            user.Password = newHash;
+
+            SaveUsers();  //Save and confirm
+            message = "Password updated successfully!";
+            return true;
+        }
 
 
     }

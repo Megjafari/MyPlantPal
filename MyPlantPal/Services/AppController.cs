@@ -403,7 +403,30 @@ namespace MyPlantPal
             }
         }
 
+        private void HandleChangePassword()
+        {
+            
+            if (_currentUser == null) return;
 
+            var (oldPassword, newPassword) = _menuService.ShowChangePasswordForm(); //Collect passwords from the menu
+
+            bool success = _userService.ChangePassword(
+                _currentUser.Username,
+                oldPassword,
+                newPassword,
+                out string message // Receives the success/error message
+            );
+
+            //Display feedback
+            if (success)
+            {
+                _menuService.ShowSuccessMessage(message);
+            }
+            else
+            {
+                _menuService.ShowErrorMessage(message);
+            }
+        }
 
 
         // Manages the Settings menu workflow, allowing users to securely delete their account and associated data.
@@ -414,6 +437,12 @@ namespace MyPlantPal
                 var choice = _menuService.ShowSettingsMenu();
 
                 if (choice == "Back") return;
+
+                if (choice == "Change Password")
+                {
+                    HandleChangePassword();
+                    _menuService.WaitForContinue();
+                }
 
                 if (choice == "Delete Account")
                 {

@@ -320,8 +320,9 @@ namespace MyPlantPal.UI
                 new SelectionPrompt<string>()
                     .Title("[green]Settings[/]")
                     .AddChoices(new[] { 
-                "Delete Account",  
-                "Back"             
+                        "Change Password",
+                        "Delete Account",  
+                        "Back"             
                     }));
         }
 
@@ -343,6 +344,23 @@ namespace MyPlantPal.UI
                     .Secret());
         }
 
+        public (string oldPassword, string newPassword) ShowChangePasswordForm()
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(new FigletText("Change Password").Color(Color.Yellow));
+            AnsiConsole.MarkupLine("[yellow]Please enter your current and new password.[/]");
+            AnsiConsole.WriteLine();
+
+            var oldPassword = AnsiConsole.Prompt(
+                new TextPrompt<string>("[yellow]Current password:[/]")
+                    .Secret()); // Hides the input
+
+            var newPassword = AnsiConsole.Prompt(
+                new TextPrompt<string>("[yellow]New password:[/]")
+                    .Secret()); // Hides the input
+
+            return (oldPassword, newPassword);
+        }
 
 
     }
