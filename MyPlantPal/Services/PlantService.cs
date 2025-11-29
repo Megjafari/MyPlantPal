@@ -93,7 +93,7 @@ namespace MyPlantPal.Services
 
             if (plant != null)
             {
-                plant.LastWatered = DateTime.Now;
+                plant.LastWatered = DateTime.UtcNow;
                 SavePlants();
                 return true;
             }
@@ -122,7 +122,7 @@ namespace MyPlantPal.Services
 
             stats.TotalPlants = userPlants.Count;   
             stats.PlantsNeedingWater = userPlants.Count(p => p.NeedsWatering);
-            stats.PlantsWateredToday = userPlants.Count(p => p.LastWatered.Date == DateTime.Today);
+            stats.PlantsWateredToday = userPlants.Count(p => p.LastWatered.Date == DateTime.UtcNow.Date);
             stats.AverageWateringInterval = Math.Round(userPlants.Average(p => p.WateringIntervalDays), 1); // Rounded to 1 decimal place
 
             // Find most common plant species
@@ -157,7 +157,7 @@ namespace MyPlantPal.Services
         {
             return GetUserPlants(username)
                 .Where(p => p.NeedsWatering)
-                .OrderByDescending(p => (DateTime.Now - p.NextWateringDate).TotalDays)
+                .OrderByDescending(p => (DateTime.UtcNow - p.NextWateringDate).TotalDays)
                 .ToList();
         }
 
@@ -213,7 +213,7 @@ namespace MyPlantPal.Services
 
         private int GetSeasonAdjustedInterval(int baseInterval)
         {
-            var currentMonth = DateTime.Now.Month;
+            var currentMonth = DateTime.UtcNow.Month;
             // WINTER (Nov-Feb): 50% Less watering
             if (currentMonth >= 11 || currentMonth <= 2)
             {

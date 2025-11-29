@@ -23,7 +23,7 @@ namespace MyPlantPal.Models
         {
             Username = username;
             Password = password;
-            DateTimeCreated = DateTime.Now;
+            DateTimeCreated = DateTime.UtcNow;
         }
     }
 }

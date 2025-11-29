@@ -196,8 +196,8 @@ namespace MyPlantPal.UI
                     new Text(plant.Name),
                     new Text(plant.Species),
                     new Markup(scheduleDisplay), // Add the schedule info here
-                    new Text(plant.LastWatered.ToString("yyyy-MM-dd")),
-                    new Text(plant.NextWateringDate.ToString("yyyy-MM-dd")),
+                    new Text(plant.LastWatered.ToLocalTime().ToString("yyyy-MM-dd")),
+                    new Text(plant.NextWateringDate.ToLocalTime().ToString("yyyy-MM-dd")),
                     status
                 );
             }
@@ -224,7 +224,7 @@ namespace MyPlantPal.UI
 
             foreach (var plant in plantsNeedingWater)
             {
-                var daysOverdue = (DateTime.Now - plant.NextWateringDate).Days;
+                var daysOverdue = (DateTime.UtcNow - plant.NextWateringDate).Days;
                 table.AddRow(
                     plant.Name,
                     plant.Species,
