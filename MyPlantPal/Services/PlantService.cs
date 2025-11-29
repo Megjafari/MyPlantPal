@@ -199,6 +199,18 @@ namespace MyPlantPal.Services
             _plants.Add(plant);
             SavePlants();
             return true;
+
         }
+        //This method deletes all plants owned by a specific user and then saves the updated list to a file.
+        public void RemoveAllPlantsByUser(string username)
+        {
+            // Remove all plants where the OwnerUsername matches the deleted user
+            _plants.RemoveAll(p => p.OwnerUsername.Equals(username, StringComparison.OrdinalIgnoreCase));
+
+            // Save the updated list to plants.json
+            SavePlants();
+        }
+
     }
+
 }
