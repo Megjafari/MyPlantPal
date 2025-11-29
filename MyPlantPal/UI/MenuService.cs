@@ -1,5 +1,5 @@
 ﻿using Spectre.Console;
-using MyPlantPal.Models; // CRITICAL: Ensures Plant and Plantstatistics are found
+using MyPlantPal.Models; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,16 +34,17 @@ namespace MyPlantPal.UI
 
         public string ShowMainMenu()
         {
-            // FIX: Removed AnsiConsole.Clear() to allow AppController to draw the header/stats first.
+            //  Removed AnsiConsole.Clear() to allow AppController to draw the header/stats first.
             return AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
-                    .Title(" ") // FIX: Set title to empty to avoid visual clutter with the header
+                    .Title(" ") //  Set title to empty to avoid visual clutter with the header
                     .PageSize(10)
                     .AddChoices(new[] {
                         "My Plants",
                         "Add Plants",
                         "Watering Tasks",
                         "Statistics",
+                        "Settings",
                         "Logout"
                     }));
         }
@@ -111,7 +112,7 @@ namespace MyPlantPal.UI
                 "Add a custom plant",
                 "Back to Plant Menu"
                     }));
-            //fixed
+            
             if (actionChoice == "Back to Plant Menu")
                 
                 return (string.Empty, string.Empty, 0, true);
@@ -310,5 +311,39 @@ namespace MyPlantPal.UI
                 new TextPrompt<string>("Press [green]Enter[/] to continue...")
                     .AllowEmpty());
         }
+
+        // Shows the settings menu (account deletion, etc.)
+        public string ShowSettingsMenu()
+        {
+            AnsiConsole.Clear();  // Clears the console screen
+            return AnsiConsole.Prompt(
+                new SelectionPrompt<string>()
+                    .Title("[green]Settings[/]")
+                    .AddChoices(new[] { 
+                "Delete Account",  
+                "Back"             
+                    }));
+        }
+
+        public bool ConfirmDeleteAccount()  //// Shows a warning screen and asks the user to confirm account deletion
+        {
+            AnsiConsole.Clear();
+            AnsiConsole.Write(new FigletText("DELETE ACCOUNT").Color(Color.Red));  //// Big red warning delete account 
+            AnsiConsole.MarkupLine("[bold red]WARNING: This action cannot be undone![/]");
+            AnsiConsole.MarkupLine("[red]All your plants and data will be permanently lost.[/]");
+            AnsiConsole.WriteLine();
+            //// Returns true if user selects "Yes", false otherwise
+            return AnsiConsole.Confirm("Are you sure you want to delete your account?");
+        }
+        // Asks the user to enter their password before deleting the account
+        public string AskPasswordForDeletion() // Prompts user for their password (input is hidden with .Secret())
+        { 
+            return AnsiConsole.Prompt(
+                new TextPrompt<string>("Enter your [red]password[/] to confirm deletion:")
+                    .Secret());
+        }
+
+
+
     }
 }

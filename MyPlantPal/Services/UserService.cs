@@ -99,6 +99,34 @@ namespace MyPlantPal.Services
             }
 
             return null;
+       }
+
+        //The method that will delete the user
+
+        public bool DeleteUser(string username, string password)
+        {
+            var user = _users.FirstOrDefault(u => u.Username.ToLower() == username.ToLower());
+
+            if (user == null) return false;
+
+            // 1. Verify password before deletion (compare the hash of the input password with the stored hash)
+            var inputHash = HashPassword(password);
+
+            if (user.Password != inputHash)
+            {
+                return false; // Incorrect password
+            }
+
+            // 2. Remove user and save the updated list
+            _users.Remove(user);
+            SaveUsers();
+
+            return true;
         }
+
+
+
     }
+
+  
 }

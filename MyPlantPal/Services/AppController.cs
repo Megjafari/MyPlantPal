@@ -183,6 +183,11 @@ namespace MyPlantPal
                         AnsiConsole.WriteLine();
                         DisplayUserStats();
                         break;
+
+                    case "Settings":       
+                        HandleSettings(); 
+                        break;
+
                     case "Logout":
                         _currentUser = null;
                         _menuService.ShowSuccessMessage("Logged out successfully.");
@@ -397,5 +402,50 @@ namespace MyPlantPal
                 }
             }
         }
+
+
+
+
+        // Manages the Settings menu workflow, allowing users to securely delete their account and associated data.
+        private void HandleSettings()
+        {
+            while (true)
+            {
+                var choice = _menuService.ShowSettingsMenu();
+
+                if (choice == "Back") return;
+
+                if (choice == "Delete Account")
+                {
+                    // 1. Ask for confirmation
+                    if (_menuService.ConfirmDeleteAccount())
+                    {
+                        // 2. Ask for password to confirm deletion
+                        var password = _menuService.AskPasswordForDeletion();
+
+                        // 3. Attempt to delete user
+                        // Use !.Username because we are sure the user is logged in (_currentUser is not null)
+                        if (_userService.DeleteUser(_currentUser!.Username, password))
+                        {
+                            // 4. Delete all associated plants (cascading delete)
+                            _plantService.RemoveAllPlantsByUser(_currentUser.Username);
+
+                            _menuService.ShowSuccessMessage("Account deleted successfully. Goodbye!");
+
+                            // 5. Logout by clearing current user and exit settings menu
+                            _currentUser = null;
+                            _menuService.WaitForContinue();
+                            return; // Exit HandleSettings, returning to the Main Loop
+                        }
+                        else
+                        {
+                            _menuService.ShowErrorMessage("Wrong password. Deletion cancelled.");
+                            _menuService.WaitForContinue();
+                        }
+                    }
+                }
+            }
+        }
     }
+
 }
