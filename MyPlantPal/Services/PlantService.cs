@@ -107,7 +107,7 @@ namespace MyPlantPal.Services
             return _plants.Count(p => p.OwnerUsername.ToLower() == username.ToLower());
         }
         // Helper to get plant by ID
-        public Plant GetPlantById(string plantId, string ownerUsername)
+        public Plant? GetPlantById(string plantId, string ownerUsername)
         {
             return _plants.FirstOrDefault(p => p.Id == plantId && p.OwnerUsername == ownerUsername);
         }
@@ -168,14 +168,14 @@ namespace MyPlantPal.Services
                 .ToDictionary(g => g.Key, g => g.Count());
         }
 
-        public Plant GetMostThirstyPlant(string username)   // Plant that needs watering most frequently
+        public Plant? GetMostThirstyPlant(string username)   // Plant that needs watering most frequently
         {
             return GetUserPlants(username)
                 .OrderBy(p => p.WateringIntervalDays)
                 .FirstOrDefault();
         }
 
-        public Plant GetMostNeglectedPlant(string username)     // Plant that is most neglected (most overdue)
+        public Plant? GetMostNeglectedPlant(string username)     // Plant that is most neglected (most overdue)
         {
             return GetOverduePlants(username)
                 .FirstOrDefault();

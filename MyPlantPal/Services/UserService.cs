@@ -82,7 +82,7 @@ namespace MyPlantPal.Services
             return true;
         }
 
-        public User Login(string username, string password)
+        public User? Login(string username, string password)
         {
             var user = _users.FirstOrDefault(u => u.Username.ToLower() == username.ToLower());
 
