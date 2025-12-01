@@ -1,272 +1,252 @@
 ﻿[
   {
-    "Id": "",
     "Name": "Snake Plant",
     "Species": "Sansevieria trifasciata",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 14,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 14
   },
   {
-    "Id": "",
     "Name": "ZZ Plant",
     "Species": "Zamioculcas zamiifolia",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 14,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 21
   },
   {
-    "Id": "",
     "Name": "Pothos",
     "Species": "Epipremnum aureum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 7
   },
   {
-    "Id": "",
+    "Name": "Monstera Deliciosa",
+    "Species": "Monstera deliciosa",
+    "WateringIntervalDays": 7
+  },
+  {
     "Name": "Spider Plant",
     "Species": "Chlorophytum comosum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 7
   },
   {
-    "Id": "",
-    "Name": "Cast Iron Plant",
-    "Species": "Aspidistra elatior",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 10,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
     "Name": "Peace Lily",
-    "Species": "Spathiphyllum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 5,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "Species": "Spathiphyllum wallisii",
+    "WateringIntervalDays": 5
   },
   {
-    "Id": "",
-    "Name": "African Violet",
-    "Species": "Saintpaulia",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 4,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Orchid",
-    "Species": "Phalaenopsis",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Geranium",
-    "Species": "Pelargonium",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 5,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Begonia",
-    "Species": "Begonia",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 4,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Monstera",
-    "Species": "Monstera deliciosa",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
     "Name": "Fiddle Leaf Fig",
     "Species": "Ficus lyrata",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 10
   },
   {
-    "Id": "",
     "Name": "Rubber Plant",
     "Species": "Ficus elastica",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 10
   },
   {
-    "Id": "",
-    "Name": "Chinese Money Plant",
-    "Species": "Pilea peperomioides",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 6,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "String of Pearls",
-    "Species": "Senecio rowleyanus",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 10,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
     "Name": "Aloe Vera",
-    "Species": "Aloe barbadensis",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 14,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "Species": "Aloe barbadensis miller",
+    "WateringIntervalDays": 21
   },
   {
-    "Id": "",
+    "Name": "Cast Iron Plant",
+    "Species": "Aspidistra elatior",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Parlor Palm",
+    "Species": "Chamaedorea elegans",
+    "WateringIntervalDays": 7
+  },
+  {
     "Name": "Jade Plant",
     "Species": "Crassula ovata",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 10,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 14
   },
   {
-    "Id": "",
-    "Name": "Echeveria",
-    "Species": "Echeveria",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 10,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Christmas Cactus",
-    "Species": "Schlumbergera",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Burro's Tail",
-    "Species": "Sedum morganianum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 10,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Basil",
-    "Species": "Ocimum basilicum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 3,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Mint",
-    "Species": "Mentha",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 3,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Rosemary",
-    "Species": "Rosmarinus officinalis",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 5,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Thyme",
-    "Species": "Thymus vulgaris",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 5,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Parsley",
-    "Species": "Petroselinum crispum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 4,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Philodendron",
-    "Species": "Philodendron hederaceum",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 7,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
-  },
-  {
-    "Id": "",
-    "Name": "Dracaena",
+    "Name": "Dracaena Marginata",
     "Species": "Dracaena marginata",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 10,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 10
   },
   {
-    "Id": "",
-    "Name": "Calathea",
-    "Species": "Calathea",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 5,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "Name": "African Violet",
+    "Species": "Saintpaulia ionantha",
+    "WateringIntervalDays": 5
   },
   {
-    "Id": "",
+    "Name": "Boston Fern",
+    "Species": "Nephrolepis exaltata",
+    "WateringIntervalDays": 4
+  },
+  {
+    "Name": "Calathea Orbifolia",
+    "Species": "Calathea orbifolia",
+    "WateringIntervalDays": 6
+  },
+  {
+    "Name": "String of Pearls",
+    "Species": "Senecio rowleyanus",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Anthurium",
+    "Species": "Anthurium andraeanum",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Succulent - Echeveria",
+    "Species": "Echeveria spp.",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Air Plant",
+    "Species": "Tillandsia spp.",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Hoya (Wax Plant)",
+    "Species": "Hoya carnosa",
+    "WateringIntervalDays": 10
+  },
+  {
+    "Name": "Areca Palm",
+    "Species": "Dypsis lutescens",
+    "WateringIntervalDays": 7
+  },
+  {
     "Name": "English Ivy",
     "Species": "Hedera helix",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 6,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "WateringIntervalDays": 5
   },
   {
-    "Id": "",
-    "Name": "Fern",
-    "Species": "Nephrolepis exaltata",
-    "OwnerUsername": "system",
-    "WateringIntervalDays": 4,
-    "LastWatered": "0001-01-01T00:00:00",
-    "NextWateringDate": "0001-01-01T00:00:00"
+    "Name": "Weeping Fig",
+    "Species": "Ficus benjamina",
+    "WateringIntervalDays": 10
+  },
+  {
+    "Name": "Begonia Maculata",
+    "Species": "Begonia maculata",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Croton",
+    "Species": "Codiaeum variegatum",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Christmas Cactus",
+    "Species": "Schlumbergera spp.",
+    "WateringIntervalDays": 10
+  },
+  {
+    "Name": "Kalanchoe",
+    "Species": "Kalanchoe blossfeldiana",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Philodendron Birkin",
+    "Species": "Philodendron \"Birkin\"",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Bird of Paradise",
+    "Species": "Strelitzia reginae",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Prayer Plant",
+    "Species": "Maranta leuconeura",
+    "WateringIntervalDays": 5
+  },
+  {
+    "Name": "Amaryllis",
+    "Species": "Hippeastrum",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Peperomia",
+    "Species": "Peperomia obtusifolia",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Pilea Peperomioides",
+    "Species": "Pilea peperomioides",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Bird's Nest Fern",
+    "Species": "Asplenium nidus",
+    "WateringIntervalDays": 6
+  },
+  {
+    "Name": "Oyster Plant",
+    "Species": "Tradescantia spathacea",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Money Tree",
+    "Species": "Pachira aquatica",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Grape Ivy",
+    "Species": "Cissus rhombifolia",
+    "WateringIntervalDays": 5
+  },
+  {
+    "Name": "Cactus - Prickly Pear",
+    "Species": "Opuntia spp.",
+    "WateringIntervalDays": 21
+  },
+  {
+    "Name": "Crown of Thorns",
+    "Species": "Euphorbia milii",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Dumb Cane",
+    "Species": "Dieffenbachia seguine",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "Golden Barrel Cactus",
+    "Species": "Echinocactus grusonii",
+    "WateringIntervalDays": 21
+  },
+  {
+    "Name": "Haworthia",
+    "Species": "Haworthia fasciata",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Lemon Button Fern",
+    "Species": "Nephrolepis cordifolia",
+    "WateringIntervalDays": 4
+  },
+  {
+    "Name": "Orchid - Phalaenopsis",
+    "Species": "Phalaenopsis spp.",
+    "WateringIntervalDays": 10
+  },
+  {
+    "Name": "Polka Dot Plant",
+    "Species": "Hypoestes phyllostachya",
+    "WateringIntervalDays": 5
+  },
+  {
+    "Name": "Sago Palm",
+    "Species": "Cycas revoluta",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Schefflera",
+    "Species": "Schefflera actinophylla",
+    "WateringIntervalDays": 7
+  },
+  {
+    "Name": "String of Bananas",
+    "Species": "Senecio radicans",
+    "WateringIntervalDays": 14
+  },
+  {
+    "Name": "Wandering Jew",
+    "Species": "Tradescantia zebrina",
+    "WateringIntervalDays": 5
   }
 ]
